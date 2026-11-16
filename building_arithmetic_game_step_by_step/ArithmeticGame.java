@@ -7,8 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,43 +18,45 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
-public class ArithmeticGame extends JFrame{
-    
-    public ArithmeticGame(){
+import java.util.Random;
+
+public class ArithmeticGame extends JFrame {
+
+    public ArithmeticGame() {
         setTitle("Interactive Arithmetic Game");
-        setSize(750,700);
+        setSize(750, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JLabel titleLabel = new JLabel("Arithmetic Game");
+        JLabel titleLabel = new JLabel("Interactive Arithmetic Game", JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        titleLabel.setForeground(Color.BLUE);
 
         JButton submitButton = new JButton("Submit");
 
         JPanel headerPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
-        JPanel inputPanel = new JPanel();
+        JPanel questionPanel = new JPanel();
 
-        headerPanel.setBackground(Color.BLUE);
-        JTextField textField = new JTextField(15);
-        textField.setPreferredSize(new Dimension(200, 30));
+        questionPanel.setBackground(Color.WHITE);
+        JLabel questionLabel = new JLabel("Your Question Will Appear Here", JLabel.CENTER);
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 24));
 
-        String[] operations = {
-            "Addition", "Subtraction", "Multiplication", "Division", "Modulo"
-        };
-        JComboBox <String> operataionBox = new JComboBox<>(operations);
+        headerPanel.setBackground(Color.LIGHT_GRAY);
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
 
         headerPanel.add(titleLabel);
         buttonPanel.add(submitButton);
-        buttonPanel.add(operataionBox);
-        inputPanel.add(textField);
+        questionPanel.add(questionLabel);
+        questionPanel.add(buttonPanel);
 
         add(headerPanel, BorderLayout.NORTH);
-        add(buttonPanel, BorderLayout.CENTER);
-        add(inputPanel, BorderLayout.SOUTH);
+        add(questionPanel, BorderLayout.CENTER);
         setVisible(true);
 
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         new ArithmeticGame();
     }
 }
