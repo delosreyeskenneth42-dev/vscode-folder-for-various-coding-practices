@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -26,24 +28,20 @@ public class ArithmeticGame extends JFrame {
         setLocationRelativeTo(null);
 
         // Header Panel
-        JLabel titleLabel = new JLabel(
-                "Interactive Arithmetic Game", JLabel.CENTER);
+        JLabel titleLabel = new JLabel("Interactive Arithmetic Game", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setForeground(Color.BLUE);
 
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(Color.LIGHT_GRAY);
-        headerPanel.setBorder(
-                BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
         headerPanel.add(titleLabel);
 
         // Question Panel
-        JPanel questionPanel = new JPanel(
-                new GridLayout(2, 1, 0, 15));
+        JPanel questionPanel = new JPanel(new GridLayout(2, 1, 0, 15));
 
         // Equation Panel
-        JPanel equationPanel = new JPanel(
-                new GridLayout(1, 5, 15, 0));
+        JPanel equationPanel = new JPanel(new GridLayout(1, 5, 15, 0));
 
         JLabel firstNumberLabel = new JLabel("10", JLabel.CENTER);
         firstNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
@@ -76,8 +74,7 @@ public class ArithmeticGame extends JFrame {
         questionPanel.add(submitPanel);
 
         // Options Panel
-        JPanel optionsPanel = new JPanel(
-                new GridLayout(1, 3, 15, 0));
+        JPanel optionsPanel = new JPanel(new GridLayout(1, 3, 15, 0));
 
         // Operation Panel
         JLabel operationLabel = new JLabel("Operation:");
@@ -99,14 +96,23 @@ public class ArithmeticGame extends JFrame {
 
         multiplicationButton.setSelected(true);
 
-        JPanel operationPanel = new JPanel(
-                new GridLayout(6, 1, 5, 5));
+        JPanel operationPanel = new JPanel();
 
+        operationPanel.setLayout(
+                new BoxLayout(operationPanel, BoxLayout.Y_AXIS));
+        operationPanel.setBackground(Color.RED);
+
+        operationPanel.add(Box.createVerticalStrut(100));
         operationPanel.add(operationLabel);
+        operationPanel.add(Box.createVerticalStrut(10));
         operationPanel.add(additionButton);
+        operationPanel.add(Box.createVerticalStrut(10));
         operationPanel.add(subtractionButton);
+        operationPanel.add(Box.createVerticalStrut(10));
         operationPanel.add(multiplicationButton);
+        operationPanel.add(Box.createVerticalStrut(10));
         operationPanel.add(divisionButton);
+        operationPanel.add(Box.createVerticalStrut(10));
         operationPanel.add(moduloButton);
 
         // Difficulty Panel
@@ -125,12 +131,16 @@ public class ArithmeticGame extends JFrame {
 
         easyButton.setSelected(true);
 
-        JPanel difficultyPanel = new JPanel(
-                new GridLayout(4, 1, 5, 5));
+        JPanel difficultyPanel = new JPanel();
+        difficultyPanel.setLayout(new BoxLayout(difficultyPanel, BoxLayout.Y_AXIS));
 
+        difficultyPanel.add(Box.createVerticalStrut(100));
         difficultyPanel.add(difficultyLabel);
+        difficultyPanel.add(Box.createVerticalStrut(10));
         difficultyPanel.add(easyButton);
+        difficultyPanel.add(Box.createVerticalStrut(10));
         difficultyPanel.add(mediumButton);
+        difficultyPanel.add(Box.createVerticalStrut(10));
         difficultyPanel.add(hardButton);
 
         // Score Panel
@@ -149,26 +159,29 @@ public class ArithmeticGame extends JFrame {
         JLabel incorrectScore = new JLabel("0", JLabel.CENTER);
         incorrectScore.setFont(new Font("Arial", Font.BOLD, 24));
 
-        JPanel correctPanel = new JPanel(
-                new GridLayout(2, 1, 5, 5));
+        JPanel correctPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         correctPanel.add(correctLabel);
         correctPanel.add(correctScore);
 
-        JPanel incorrectPanel = new JPanel(
-                new GridLayout(2, 1, 5, 5));
+        JPanel incorrectPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         incorrectPanel.add(incorrectLabel);
         incorrectPanel.add(incorrectScore);
 
-        JPanel scoreValuesPanel = new JPanel(
-                new GridLayout(1, 2, 10, 0));
+        JPanel scoreValuesPanel = new JPanel(new GridLayout(1, 2, 5, 0));
+        scoreValuesPanel.setBackground(Color.CYAN);
 
         scoreValuesPanel.add(correctPanel);
         scoreValuesPanel.add(incorrectPanel);
 
-        JPanel scorePanel = new JPanel(
-                new BorderLayout(5, 10));
+        JPanel scorePanel = new JPanel();
+        scorePanel.setLayout(new BoxLayout(scorePanel, BoxLayout.Y_AXIS));
 
+        scorePanel.setBackground(Color.RED);
+        scorePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+        scorePanel.add(Box.createVerticalStrut(100));
         scorePanel.add(scoreLabel, BorderLayout.NORTH);
+        scorePanel.add(Box.createVerticalStrut(10));
         scorePanel.add(scoreValuesPanel, BorderLayout.CENTER);
 
         // Add Bottom Sections
@@ -177,11 +190,9 @@ public class ArithmeticGame extends JFrame {
         optionsPanel.add(scorePanel);
 
         // Main Layout
-        JPanel mainPanel = new JPanel(
-                new BorderLayout(15, 20));
+        JPanel mainPanel = new JPanel(new BorderLayout(15, 20));
 
-        mainPanel.setBorder(
-                BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         mainPanel.add(questionPanel, BorderLayout.NORTH);
         mainPanel.add(optionsPanel, BorderLayout.CENTER);
