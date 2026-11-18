@@ -16,6 +16,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 
 public class ArithmeticGame extends JFrame {
@@ -146,6 +147,7 @@ public class ArithmeticGame extends JFrame {
         // Score Panel
         JLabel scoreLabel = new JLabel("Score:");
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        scoreLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JLabel correctLabel = new JLabel("Correct", JLabel.CENTER);
         correctLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -159,16 +161,23 @@ public class ArithmeticGame extends JFrame {
         JLabel incorrectScore = new JLabel("0", JLabel.CENTER);
         incorrectScore.setFont(new Font("Arial", Font.BOLD, 24));
 
-        JPanel correctPanel = new JPanel(new GridLayout(2, 1, 5, 5));
+        JPanel correctPanel = new JPanel();
+        correctPanel.setLayout(new BoxLayout(correctPanel, BoxLayout.Y_AXIS));
+
         correctPanel.add(correctLabel);
+        correctPanel.add(Box.createVerticalStrut(10));
         correctPanel.add(correctScore);
 
-        JPanel incorrectPanel = new JPanel(new GridLayout(2, 1, 5, 5));
+        JPanel incorrectPanel = new JPanel();
+        incorrectPanel.setLayout(new BoxLayout(incorrectPanel, BoxLayout.Y_AXIS));
+
         incorrectPanel.add(incorrectLabel);
+        incorrectPanel.add(Box.createVerticalStrut(10));
         incorrectPanel.add(incorrectScore);
 
         JPanel scoreValuesPanel = new JPanel(new GridLayout(1, 2, 5, 0));
         scoreValuesPanel.setBackground(Color.CYAN);
+        scoreValuesPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         scoreValuesPanel.add(correctPanel);
         scoreValuesPanel.add(incorrectPanel);
@@ -176,13 +185,10 @@ public class ArithmeticGame extends JFrame {
         JPanel scorePanel = new JPanel();
         scorePanel.setLayout(new BoxLayout(scorePanel, BoxLayout.Y_AXIS));
 
-        scorePanel.setBackground(Color.RED);
-        scorePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
         scorePanel.add(Box.createVerticalStrut(100));
-        scorePanel.add(scoreLabel, BorderLayout.NORTH);
+        scorePanel.add(scoreLabel);
         scorePanel.add(Box.createVerticalStrut(10));
-        scorePanel.add(scoreValuesPanel, BorderLayout.CENTER);
+        scorePanel.add(scoreValuesPanel);
 
         // Add Bottom Sections
         optionsPanel.add(operationPanel);
