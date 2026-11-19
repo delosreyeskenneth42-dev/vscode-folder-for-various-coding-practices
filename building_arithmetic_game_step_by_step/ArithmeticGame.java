@@ -4,6 +4,7 @@ package building_arithmetic_game_step_by_step;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -62,8 +63,19 @@ public class ArithmeticGame extends JFrame {
             max = 200;
         }
 
-        int firstNumber = random.nextInt(max - min + 1) + min;
-        int secondNumber = random.nextInt(max - min + 1) + min;
+        int firstNumber;
+        int secondNumber;
+
+        if (divisionButton.isSelected()) {
+            firstNumber = random.nextInt(max - min + 1) + min;
+
+            do {
+                secondNumber = random.nextInt(firstNumber) + 1;
+            } while (firstNumber % secondNumber != 0);
+        } else {
+            firstNumber = random.nextInt(max - min + 1) + min;
+            secondNumber = random.nextInt(max - min + 1) + min;
+        }
 
         firstNumberLabel.setText(String.valueOf(firstNumber));
         secondNumberLabel.setText(String.valueOf(secondNumber));
@@ -88,14 +100,20 @@ public class ArithmeticGame extends JFrame {
 
     private void checkAnswer() {
         String userInput = answerField.getText();
-        int playerAnswer = Integer.parseInt(userInput);
 
-        if (playerAnswer == correctAnswer) {
-            correctCount++;
-            correctScore.setText(String.valueOf(correctCount));
-        } else {
-            incorrectCount++;
-            incorrectScore.setText(String.valueOf(incorrectCount));
+        try {
+            int playerAnswer = Integer.parseInt(userInput);
+
+            if (playerAnswer == correctAnswer) {
+                correctCount++;
+                correctScore.setText(String.valueOf(correctCount));
+            } else {
+                incorrectCount++;
+                incorrectScore.setText(String.valueOf(incorrectCount));
+            }
+            answerField.setText("");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number!");
         }
         generateQuestion();
     }
@@ -144,6 +162,8 @@ public class ArithmeticGame extends JFrame {
         answerField.setFont(new Font("Arial", Font.BOLD, 24));
         answerField.setPreferredSize(new Dimension(80, 60));
         answerField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+        answerField.addActionListener(e -> checkAnswer());
 
         JPanel answerPanel = new JPanel();
         answerPanel.setLayout(new BoxLayout(answerPanel, BoxLayout.Y_AXIS));
