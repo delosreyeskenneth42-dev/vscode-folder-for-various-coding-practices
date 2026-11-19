@@ -19,6 +19,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 
+import java.util.Random;
+
 public class ArithmeticGame extends JFrame {
 
     public ArithmeticGame() {
@@ -46,23 +48,25 @@ public class ArithmeticGame extends JFrame {
 
         JLabel firstNumberLabel = new JLabel("10", JLabel.CENTER);
         firstNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        firstNumberLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JLabel operatorLabel = new JLabel("×", JLabel.CENTER);
         operatorLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
         JLabel secondNumberLabel = new JLabel("3", JLabel.CENTER);
         secondNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        secondNumberLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JLabel equalLabel = new JLabel("=", JLabel.CENTER);
         equalLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
         JTextField answerField = new JTextField(5);
         answerField.setFont(new Font("Arial", Font.BOLD, 24));
+        answerField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JPanel answerPanel = new JPanel();
 
-        answerPanel.setLayout(
-                new BoxLayout(answerPanel, BoxLayout.Y_AXIS));
+        answerPanel.setLayout(new BoxLayout(answerPanel, BoxLayout.Y_AXIS));
 
         equationPanel.add(firstNumberLabel);
         equationPanel.add(operatorLabel);
@@ -106,8 +110,7 @@ public class ArithmeticGame extends JFrame {
 
         JPanel operationPanel = new JPanel();
 
-        operationPanel.setLayout(
-                new BoxLayout(operationPanel, BoxLayout.Y_AXIS));
+        operationPanel.setLayout(new BoxLayout(operationPanel, BoxLayout.Y_AXIS));
         operationPanel.setBackground(Color.RED);
 
         operationPanel.add(Box.createVerticalStrut(100));
@@ -164,12 +167,15 @@ public class ArithmeticGame extends JFrame {
 
         JLabel correctScore = new JLabel("0", JLabel.CENTER);
         correctScore.setFont(new Font("Arial", Font.BOLD, 24));
+        correctScore.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JLabel incorrectScore = new JLabel("0", JLabel.CENTER);
         incorrectScore.setFont(new Font("Arial", Font.BOLD, 24));
+        incorrectScore.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JPanel correctPanel = new JPanel();
         correctPanel.setLayout(new BoxLayout(correctPanel, BoxLayout.Y_AXIS));
+        
 
         correctPanel.add(correctLabel);
         correctPanel.add(Box.createVerticalStrut(10));
