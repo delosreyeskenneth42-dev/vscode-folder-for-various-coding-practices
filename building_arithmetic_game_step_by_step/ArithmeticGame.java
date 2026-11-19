@@ -18,6 +18,7 @@ import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Dimension;
 
 import java.util.Random;
 
@@ -57,15 +58,18 @@ public class ArithmeticGame extends JFrame {
         secondNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
         secondNumberLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
+        firstNumberLabel.setPreferredSize(new Dimension(80, 60));
+        secondNumberLabel.setPreferredSize(new Dimension(80, 60));
+
         JLabel equalLabel = new JLabel("=", JLabel.CENTER);
         equalLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
         JTextField answerField = new JTextField(5);
         answerField.setFont(new Font("Arial", Font.BOLD, 24));
+        answerField.setPreferredSize(new Dimension(80, 60));
         answerField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JPanel answerPanel = new JPanel();
-
         answerPanel.setLayout(new BoxLayout(answerPanel, BoxLayout.Y_AXIS));
 
         equationPanel.add(firstNumberLabel);
@@ -109,7 +113,6 @@ public class ArithmeticGame extends JFrame {
         multiplicationButton.setSelected(true);
 
         JPanel operationPanel = new JPanel();
-
         operationPanel.setLayout(new BoxLayout(operationPanel, BoxLayout.Y_AXIS));
         operationPanel.setBackground(Color.RED);
 
@@ -167,27 +170,49 @@ public class ArithmeticGame extends JFrame {
 
         JLabel correctScore = new JLabel("0", JLabel.CENTER);
         correctScore.setFont(new Font("Arial", Font.BOLD, 24));
-        correctScore.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JLabel incorrectScore = new JLabel("0", JLabel.CENTER);
         incorrectScore.setFont(new Font("Arial", Font.BOLD, 24));
-        incorrectScore.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+        // Correct Score Box
+        JPanel correctBox = new JPanel(new BorderLayout());
+        correctBox.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        correctBox.setPreferredSize(new Dimension(80, 70));
+        correctBox.setMinimumSize(new Dimension(80, 70));
+        correctBox.setMaximumSize(new Dimension(80, 70));
+
+        correctBox.add(correctScore, BorderLayout.CENTER);
 
         JPanel correctPanel = new JPanel();
         correctPanel.setLayout(new BoxLayout(correctPanel, BoxLayout.Y_AXIS));
-        
+
+        correctLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        correctBox.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         correctPanel.add(correctLabel);
         correctPanel.add(Box.createVerticalStrut(10));
-        correctPanel.add(correctScore);
+        correctPanel.add(correctBox);
+
+        // Incorrect Score Box
+        JPanel incorrectBox = new JPanel(new BorderLayout());
+        incorrectBox.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        incorrectBox.setPreferredSize(new Dimension(80, 70));
+        incorrectBox.setMinimumSize(new Dimension(80, 70));
+        incorrectBox.setMaximumSize(new Dimension(80, 70));
+
+        incorrectBox.add(incorrectScore, BorderLayout.CENTER);
 
         JPanel incorrectPanel = new JPanel();
         incorrectPanel.setLayout(new BoxLayout(incorrectPanel, BoxLayout.Y_AXIS));
 
+        incorrectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        incorrectBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         incorrectPanel.add(incorrectLabel);
         incorrectPanel.add(Box.createVerticalStrut(10));
-        incorrectPanel.add(incorrectScore);
+        incorrectPanel.add(incorrectBox);
 
+        // Score Values Panel
         JPanel scoreValuesPanel = new JPanel(new GridLayout(1, 2, 5, 0));
         scoreValuesPanel.setBackground(Color.CYAN);
         scoreValuesPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
