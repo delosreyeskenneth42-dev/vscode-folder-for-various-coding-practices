@@ -41,6 +41,11 @@ public class ArithmeticGame extends JFrame {
     private JRadioButton hardButton;
 
     private int correctAnswer;
+    private JTextField answerField;
+    private JLabel correctScore;
+    private JLabel incorrectScore;
+    private int correctCount;
+    private int incorrectCount;
 
     private void generateQuestion() {
         int min = 1;
@@ -78,6 +83,19 @@ public class ArithmeticGame extends JFrame {
         } else if (moduloButton.isSelected()) {
             operatorLabel.setText("%");
             correctAnswer = firstNumber % secondNumber;
+        }
+    }
+
+    private void checkAnswer() {
+        String userInput = answerField.getText();
+        int playerAnswer = Integer.parseInt(userInput);
+
+        if (playerAnswer == correctAnswer) {
+            correctCount++;
+            correctScore.setText(String.valueOf(correctCount));
+        } else {
+            incorrectCount++;
+            incorrectScore.setText(String.valueOf(incorrectCount));
         }
     }
 
@@ -121,7 +139,7 @@ public class ArithmeticGame extends JFrame {
         JLabel equalLabel = new JLabel("=", JLabel.CENTER);
         equalLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
-        JTextField answerField = new JTextField(5);
+        answerField = new JTextField(5);
         answerField.setFont(new Font("Arial", Font.BOLD, 24));
         answerField.setPreferredSize(new Dimension(80, 60));
         answerField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -136,6 +154,8 @@ public class ArithmeticGame extends JFrame {
 
         // Submit Button Panel
         JButton submitButton = new JButton("Submit");
+
+        submitButton.addActionListener(e -> checkAnswer());
 
         answerPanel.add(Box.createVerticalStrut(40));
         answerPanel.add(answerField);
@@ -237,10 +257,10 @@ public class ArithmeticGame extends JFrame {
         JLabel incorrectLabel = new JLabel("Incorrect", JLabel.CENTER);
         incorrectLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
-        JLabel correctScore = new JLabel("0", JLabel.CENTER);
+        correctScore = new JLabel("0", JLabel.CENTER);
         correctScore.setFont(new Font("Arial", Font.BOLD, 24));
 
-        JLabel incorrectScore = new JLabel("0", JLabel.CENTER);
+        incorrectScore = new JLabel("0", JLabel.CENTER);
         incorrectScore.setFont(new Font("Arial", Font.BOLD, 24));
 
         // Correct Score Box
