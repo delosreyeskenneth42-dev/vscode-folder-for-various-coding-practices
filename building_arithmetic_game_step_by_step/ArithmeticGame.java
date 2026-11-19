@@ -35,9 +35,27 @@ public class ArithmeticGame extends JFrame {
     private JRadioButton divisionButton;
     private JRadioButton moduloButton;
 
+    private JRadioButton easyButton;
+    private JRadioButton mediumButton;
+    private JRadioButton hardButton;
+
     private void generateQuestion() {
-        int firstNumber = random.nextInt(50) + 1;
-        int secondNumber = random.nextInt(50) + 1;
+        int min = 1;
+        int max = 50;
+
+        if (easyButton.isSelected()) {
+            min = 1;
+            max = 50;
+        } else if (mediumButton.isSelected()) {
+            min = 50;
+            max = 100;
+        } else if (hardButton.isSelected()) {
+            min = 100;
+            max = 200;
+        }
+
+        int firstNumber = random.nextInt(max - min + 1) + min;
+        int secondNumber = random.nextInt(max - min + 1) + min;
 
         firstNumberLabel.setText(String.valueOf(firstNumber));
         secondNumberLabel.setText(String.valueOf(secondNumber));
@@ -139,8 +157,6 @@ public class ArithmeticGame extends JFrame {
         divisionButton.addActionListener(e -> generateQuestion());
         moduloButton.addActionListener(e -> generateQuestion());
 
-        generateQuestion();
-
         ButtonGroup operationGroup = new ButtonGroup();
 
         operationGroup.add(additionButton);
@@ -172,10 +188,16 @@ public class ArithmeticGame extends JFrame {
         JLabel difficultyLabel = new JLabel("Level:");
         difficultyLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
-        JRadioButton easyButton = new JRadioButton("Level 1 (1-50)");
-        JRadioButton mediumButton = new JRadioButton("Level 2 (51-100)");
-        JRadioButton hardButton = new JRadioButton("Level 3 (101-200)");
+        easyButton = new JRadioButton("Level 1 (1-50)");
+        mediumButton = new JRadioButton("Level 2 (51-100)");
+        hardButton = new JRadioButton("Level 3 (101-200)");
 
+        easyButton.addActionListener(e -> generateQuestion());
+        mediumButton.addActionListener(e -> generateQuestion());
+        hardButton.addActionListener(e -> generateQuestion());
+
+        generateQuestion();
+        
         ButtonGroup difficultyGroup = new ButtonGroup();
 
         difficultyGroup.add(easyButton);
