@@ -23,12 +23,19 @@ import java.awt.Dimension;
 import java.util.Random;
 
 public class ArithmeticGame extends JFrame {
+    private Random random = new Random();
+    private JLabel firstNumberLabel;
+    private JLabel secondNumberLabel;
 
-    public ArithmeticGame() {
-
-        Random random = new Random();
+    private void generateQuestion() {
         int firstNumber = random.nextInt(50) + 1;
         int secondNumber = random.nextInt(50) + 1;
+
+        firstNumberLabel.setText(String.valueOf(firstNumber));
+        secondNumberLabel.setText(String.valueOf(secondNumber));
+    }
+
+    public ArithmeticGame() {
 
         setTitle("Interactive Arithmetic Game");
         setSize(750, 700);
@@ -51,23 +58,22 @@ public class ArithmeticGame extends JFrame {
         // Equation Panel
         JPanel equationPanel = new JPanel(new GridLayout(1, 5, 15, 0));
 
-        JLabel firstNumberLabel = new JLabel("10", JLabel.CENTER);
+        firstNumberLabel = new JLabel("10", JLabel.CENTER);
         firstNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
         firstNumberLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         JLabel operatorLabel = new JLabel("×", JLabel.CENTER);
         operatorLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
-        JLabel secondNumberLabel = new JLabel("3", JLabel.CENTER);
+        secondNumberLabel = new JLabel("3", JLabel.CENTER);
         secondNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
         secondNumberLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
-        firstNumberLabel.setText(String.valueOf(firstNumber));
-        secondNumberLabel.setText(String.valueOf(secondNumber));
-        
         firstNumberLabel.setPreferredSize(new Dimension(80, 60));
         secondNumberLabel.setPreferredSize(new Dimension(80, 60));
 
+        generateQuestion();
+        
         JLabel equalLabel = new JLabel("=", JLabel.CENTER);
         equalLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
