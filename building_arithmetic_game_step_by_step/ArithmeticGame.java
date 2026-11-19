@@ -25,6 +25,7 @@ import java.util.Random;
 
 public class ArithmeticGame extends JFrame {
     private Random random = new Random();
+
     private JLabel firstNumberLabel;
     private JLabel operatorLabel;
     private JLabel secondNumberLabel;
@@ -39,6 +40,8 @@ public class ArithmeticGame extends JFrame {
     private JRadioButton mediumButton;
     private JRadioButton hardButton;
 
+    private int correctAnswer;
+
     private void generateQuestion() {
         int min = 1;
         int max = 50;
@@ -47,10 +50,10 @@ public class ArithmeticGame extends JFrame {
             min = 1;
             max = 50;
         } else if (mediumButton.isSelected()) {
-            min = 50;
+            min = 51;
             max = 100;
         } else if (hardButton.isSelected()) {
-            min = 100;
+            min = 101;
             max = 200;
         }
 
@@ -62,14 +65,19 @@ public class ArithmeticGame extends JFrame {
 
         if (additionButton.isSelected()) {
             operatorLabel.setText("+");
+            correctAnswer = firstNumber + secondNumber;
         } else if (subtractionButton.isSelected()) {
             operatorLabel.setText("-");
+            correctAnswer = firstNumber - secondNumber;
         } else if (multiplicationButton.isSelected()) {
             operatorLabel.setText("×");
+            correctAnswer = firstNumber * secondNumber;
         } else if (divisionButton.isSelected()) {
             operatorLabel.setText("÷");
+            correctAnswer = firstNumber / secondNumber;
         } else if (moduloButton.isSelected()) {
             operatorLabel.setText("%");
+            correctAnswer = firstNumber % secondNumber;
         }
     }
 
@@ -196,8 +204,6 @@ public class ArithmeticGame extends JFrame {
         mediumButton.addActionListener(e -> generateQuestion());
         hardButton.addActionListener(e -> generateQuestion());
 
-        generateQuestion();
-        
         ButtonGroup difficultyGroup = new ButtonGroup();
 
         difficultyGroup.add(easyButton);
@@ -205,6 +211,8 @@ public class ArithmeticGame extends JFrame {
         difficultyGroup.add(hardButton);
 
         easyButton.setSelected(true);
+
+        generateQuestion();
 
         JPanel difficultyPanel = new JPanel();
         difficultyPanel.setLayout(new BoxLayout(difficultyPanel, BoxLayout.Y_AXIS));
