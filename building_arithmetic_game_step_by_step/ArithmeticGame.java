@@ -97,6 +97,7 @@ public class ArithmeticGame extends JFrame {
             incorrectCount++;
             incorrectScore.setText(String.valueOf(incorrectCount));
         }
+        generateQuestion();
     }
 
     public ArithmeticGame() {
