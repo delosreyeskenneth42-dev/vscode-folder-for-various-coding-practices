@@ -39,7 +39,7 @@ public class ArithmeticGame extends JFrame {
         headerPanel.add(titleLabel);
 
         // Question Panel
-        JPanel questionPanel = new JPanel(new GridLayout(2, 1, 0, 15));
+        JPanel questionPanel = new JPanel(new BorderLayout());
 
         // Equation Panel
         JPanel equationPanel = new JPanel(new GridLayout(1, 5, 15, 0));
@@ -59,20 +59,27 @@ public class ArithmeticGame extends JFrame {
         JTextField answerField = new JTextField(5);
         answerField.setFont(new Font("Arial", Font.BOLD, 24));
 
+        JPanel answerPanel = new JPanel();
+
+        answerPanel.setLayout(
+                new BoxLayout(answerPanel, BoxLayout.Y_AXIS));
+
         equationPanel.add(firstNumberLabel);
         equationPanel.add(operatorLabel);
         equationPanel.add(secondNumberLabel);
         equationPanel.add(equalLabel);
-        equationPanel.add(answerField);
 
         // Submit Button Panel
         JButton submitButton = new JButton("Submit");
 
-        JPanel submitPanel = new JPanel();
-        submitPanel.add(submitButton);
+        answerPanel.add(Box.createVerticalStrut(40));
+        answerPanel.add(answerField);
+        answerPanel.add(Box.createVerticalStrut(10));
+        answerPanel.add(submitButton);
 
-        questionPanel.add(equationPanel);
-        questionPanel.add(submitPanel);
+        equationPanel.add(answerPanel);
+
+        questionPanel.add(equationPanel, BorderLayout.CENTER);
 
         // Options Panel
         JPanel optionsPanel = new JPanel(new GridLayout(1, 3, 15, 0));
