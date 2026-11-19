@@ -218,7 +218,6 @@ public class ArithmeticGame extends JFrame {
 
         JPanel operationPanel = new JPanel();
         operationPanel.setLayout(new BoxLayout(operationPanel, BoxLayout.Y_AXIS));
-        operationPanel.setBackground(Color.RED);
 
         operationPanel.add(Box.createVerticalStrut(100));
         operationPanel.add(operationLabel);
@@ -324,7 +323,6 @@ public class ArithmeticGame extends JFrame {
 
         // Score Values Panel
         JPanel scoreValuesPanel = new JPanel(new GridLayout(1, 2, 5, 0));
-        scoreValuesPanel.setBackground(Color.CYAN);
         scoreValuesPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         scoreValuesPanel.add(correctPanel);
