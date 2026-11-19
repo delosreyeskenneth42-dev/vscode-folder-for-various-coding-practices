@@ -26,6 +26,10 @@ public class ArithmeticGame extends JFrame {
 
     public ArithmeticGame() {
 
+        Random random = new Random();
+        int firstNumber = random.nextInt(50) + 1;
+        int secondNumber = random.nextInt(50) + 1;
+
         setTitle("Interactive Arithmetic Game");
         setSize(750, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,6 +62,9 @@ public class ArithmeticGame extends JFrame {
         secondNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
         secondNumberLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
+        firstNumberLabel.setText(String.valueOf(firstNumber));
+        secondNumberLabel.setText(String.valueOf(secondNumber));
+        
         firstNumberLabel.setPreferredSize(new Dimension(80, 60));
         secondNumberLabel.setPreferredSize(new Dimension(80, 60));
 
