@@ -19,13 +19,21 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import java.util.Random;
 
 public class ArithmeticGame extends JFrame {
     private Random random = new Random();
     private JLabel firstNumberLabel;
+    private JLabel operatorLabel;
     private JLabel secondNumberLabel;
+
+    private JRadioButton additionButton;
+    private JRadioButton subtractionButton;
+    private JRadioButton multiplicationButton;
+    private JRadioButton divisionButton;
+    private JRadioButton moduloButton;
 
     private void generateQuestion() {
         int firstNumber = random.nextInt(50) + 1;
@@ -33,6 +41,18 @@ public class ArithmeticGame extends JFrame {
 
         firstNumberLabel.setText(String.valueOf(firstNumber));
         secondNumberLabel.setText(String.valueOf(secondNumber));
+
+        if (additionButton.isSelected()) {
+            operatorLabel.setText("+");
+        } else if (subtractionButton.isSelected()) {
+            operatorLabel.setText("-");
+        } else if (multiplicationButton.isSelected()) {
+            operatorLabel.setText("×");
+        } else if (divisionButton.isSelected()) {
+            operatorLabel.setText("÷");
+        } else if (moduloButton.isSelected()) {
+            operatorLabel.setText("%");
+        }
     }
 
     public ArithmeticGame() {
@@ -62,7 +82,7 @@ public class ArithmeticGame extends JFrame {
         firstNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
         firstNumberLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
-        JLabel operatorLabel = new JLabel("×", JLabel.CENTER);
+        operatorLabel = new JLabel("×", JLabel.CENTER);
         operatorLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
         secondNumberLabel = new JLabel("3", JLabel.CENTER);
@@ -72,8 +92,6 @@ public class ArithmeticGame extends JFrame {
         firstNumberLabel.setPreferredSize(new Dimension(80, 60));
         secondNumberLabel.setPreferredSize(new Dimension(80, 60));
 
-        generateQuestion();
-        
         JLabel equalLabel = new JLabel("=", JLabel.CENTER);
         equalLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
@@ -109,11 +127,19 @@ public class ArithmeticGame extends JFrame {
         JLabel operationLabel = new JLabel("Operation:");
         operationLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
-        JRadioButton additionButton = new JRadioButton("Addition");
-        JRadioButton subtractionButton = new JRadioButton("Subtraction");
-        JRadioButton multiplicationButton = new JRadioButton("Multiplication");
-        JRadioButton divisionButton = new JRadioButton("Division");
-        JRadioButton moduloButton = new JRadioButton("Modulo");
+        additionButton = new JRadioButton("Addition");
+        subtractionButton = new JRadioButton("Subtraction");
+        multiplicationButton = new JRadioButton("Multiplication");
+        divisionButton = new JRadioButton("Division");
+        moduloButton = new JRadioButton("Modulo");
+
+        additionButton.addActionListener(e -> generateQuestion());
+        subtractionButton.addActionListener(e -> generateQuestion());
+        multiplicationButton.addActionListener(e -> generateQuestion());
+        divisionButton.addActionListener(e -> generateQuestion());
+        moduloButton.addActionListener(e -> generateQuestion());
+
+        generateQuestion();
 
         ButtonGroup operationGroup = new ButtonGroup();
 
