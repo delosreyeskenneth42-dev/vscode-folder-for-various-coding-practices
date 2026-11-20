@@ -24,7 +24,16 @@ import java.awt.event.ActionListener;
 
 import java.util.Random;
 
-public class ArithmeticGame extends JFrame {
+import building_arithmetic_game_step_by_step.interfaces.Scoreable;
+
+import building_arithmetic_game_step_by_step.operations.ArithmeticOperation;
+import building_arithmetic_game_step_by_step.operations.Addition;
+import building_arithmetic_game_step_by_step.operations.Subtraction;
+import building_arithmetic_game_step_by_step.operations.Multiplication;
+import building_arithmetic_game_step_by_step.operations.Division;
+import building_arithmetic_game_step_by_step.operations.Modulo;
+
+public class ArithmeticGame extends JFrame implements Scoreable {
     private Random random = new Random();
 
     private JLabel firstNumberLabel;
@@ -48,6 +57,20 @@ public class ArithmeticGame extends JFrame {
     private int correctCount;
     private int incorrectCount;
 
+    @Override
+    public void addCorrectScore() {
+        correctCount++;
+        correctScore.setText(String.valueOf(correctCount));
+    }
+
+    @Override
+    public void addIncorrectScore() {
+        incorrectCount++;
+        incorrectScore.setText(String.valueOf(incorrectCount));
+    }
+
+    private ArithmeticOperation currentOperation;
+
     private void generateQuestion() {
         int min = 1;
         int max = 50;
@@ -70,32 +93,32 @@ public class ArithmeticGame extends JFrame {
             firstNumber = random.nextInt(max - min + 1) + min;
 
             do {
-                secondNumber = random.nextInt(firstNumber) + 1;
+                secondNumber = random.nextInt(firstNumber - min + 1) + min;
             } while (firstNumber % secondNumber != 0);
+
         } else {
             firstNumber = random.nextInt(max - min + 1) + min;
             secondNumber = random.nextInt(max - min + 1) + min;
         }
 
+        if (additionButton.isSelected()) {
+            currentOperation = new Addition();
+        } else if (subtractionButton.isSelected()) {
+            currentOperation = new Subtraction();
+        } else if (multiplicationButton.isSelected()) {
+            currentOperation = new Multiplication();
+        } else if (divisionButton.isSelected()) {
+            currentOperation = new Division();
+        } else if (moduloButton.isSelected()) {
+            currentOperation = new Modulo();
+        }
+
         firstNumberLabel.setText(String.valueOf(firstNumber));
         secondNumberLabel.setText(String.valueOf(secondNumber));
 
-        if (additionButton.isSelected()) {
-            operatorLabel.setText("+");
-            correctAnswer = firstNumber + secondNumber;
-        } else if (subtractionButton.isSelected()) {
-            operatorLabel.setText("-");
-            correctAnswer = firstNumber - secondNumber;
-        } else if (multiplicationButton.isSelected()) {
-            operatorLabel.setText("×");
-            correctAnswer = firstNumber * secondNumber;
-        } else if (divisionButton.isSelected()) {
-            operatorLabel.setText("÷");
-            correctAnswer = firstNumber / secondNumber;
-        } else if (moduloButton.isSelected()) {
-            operatorLabel.setText("%");
-            correctAnswer = firstNumber % secondNumber;
-        }
+        operatorLabel.setText(currentOperation.getSymbol());
+
+        correctAnswer = currentOperation.calculate(firstNumber, secondNumber);
     }
 
     private void checkAnswer() {
@@ -105,17 +128,17 @@ public class ArithmeticGame extends JFrame {
             int playerAnswer = Integer.parseInt(userInput);
 
             if (playerAnswer == correctAnswer) {
-                correctCount++;
-                correctScore.setText(String.valueOf(correctCount));
+                addCorrectScore();
             } else {
-                incorrectCount++;
-                incorrectScore.setText(String.valueOf(incorrectCount));
+                addIncorrectScore();
             }
+
             answerField.setText("");
+            generateQuestion();
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Please enter a valid number!");
         }
-        generateQuestion();
     }
 
     public ArithmeticGame() {
