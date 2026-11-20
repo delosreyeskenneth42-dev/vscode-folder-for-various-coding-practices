@@ -148,7 +148,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Header Panel
         JLabel titleLabel = new JLabel("Interactive Arithmetic Game", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setForeground(Color.BLUE);
@@ -158,10 +157,8 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         headerPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
         headerPanel.add(titleLabel);
 
-        // Question Panel
         JPanel questionPanel = new JPanel(new BorderLayout());
 
-        // Equation Panel
         JPanel equationPanel = new JPanel(new GridLayout(1, 5, 15, 0));
 
         firstNumberLabel = new JLabel("10", JLabel.CENTER);
@@ -196,7 +193,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         equationPanel.add(secondNumberLabel);
         equationPanel.add(equalLabel);
 
-        // Submit Button Panel
         JButton submitButton = new JButton("Submit");
 
         submitButton.addActionListener(e -> checkAnswer());
@@ -210,10 +206,8 @@ public class ArithmeticGame extends JFrame implements Scoreable {
 
         questionPanel.add(equationPanel, BorderLayout.CENTER);
 
-        // Options Panel
         JPanel optionsPanel = new JPanel(new GridLayout(1, 3, 15, 0));
 
-        // Operation Panel
         JLabel operationLabel = new JLabel("Operation:");
         operationLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
@@ -255,7 +249,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         operationPanel.add(Box.createVerticalStrut(10));
         operationPanel.add(moduloButton);
 
-        // Difficulty Panel
         JLabel difficultyLabel = new JLabel("Level:");
         difficultyLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
@@ -289,7 +282,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         difficultyPanel.add(Box.createVerticalStrut(10));
         difficultyPanel.add(hardButton);
 
-        // Score Panel
         JLabel scoreLabel = new JLabel("Score:");
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 18));
         scoreLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -306,7 +298,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         incorrectScore = new JLabel("0", JLabel.CENTER);
         incorrectScore.setFont(new Font("Arial", Font.BOLD, 24));
 
-        // Correct Score Box
         JPanel correctBox = new JPanel(new BorderLayout());
         correctBox.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         correctBox.setPreferredSize(new Dimension(80, 70));
@@ -325,7 +316,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         correctPanel.add(Box.createVerticalStrut(10));
         correctPanel.add(correctBox);
 
-        // Incorrect Score Box
         JPanel incorrectBox = new JPanel(new BorderLayout());
         incorrectBox.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         incorrectBox.setPreferredSize(new Dimension(80, 70));
@@ -344,7 +334,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         incorrectPanel.add(Box.createVerticalStrut(10));
         incorrectPanel.add(incorrectBox);
 
-        // Score Values Panel
         JPanel scoreValuesPanel = new JPanel(new GridLayout(1, 2, 5, 0));
         scoreValuesPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -359,12 +348,10 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         scorePanel.add(Box.createVerticalStrut(10));
         scorePanel.add(scoreValuesPanel);
 
-        // Add Bottom Sections
         optionsPanel.add(operationPanel);
         optionsPanel.add(difficultyPanel);
         optionsPanel.add(scorePanel);
 
-        // Main Layout
         JPanel mainPanel = new JPanel(new BorderLayout(15, 20));
 
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
