@@ -1,52 +1,22 @@
 
 package Arithmetic_Game_Practice;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.event.ActionListener;
-
+import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 
 public class ArithmeticGame extends JFrame {
     private Random random = new Random();
 
-    private JLabel firstNumberLabel;
-    private JLabel operatorLabel;
-    private JLabel secondNumberLabel;
+    private JLabel firstNumberLabel, operatorLabel, secondNumberLabel;
 
-    private JRadioButton additionButton;
-    private JRadioButton subtractionButton;
-    private JRadioButton multiplicationButton;
-    private JRadioButton divisionButton;
-    private JRadioButton moduloButton;
-
-    private JRadioButton easyButton;
-    private JRadioButton mediumButton;
-    private JRadioButton hardButton;
+    private JRadioButton additionButton, subtractionButton, multiplicationButton, divisionButton, moduloButton;
+    private JRadioButton easyButton, mediumButton, hardButton;
 
     private int correctAnswer;
     private JTextField answerField;
-    private JLabel correctScore;
-    private JLabel incorrectScore;
-    private int correctCount;
-    private int incorrectCount;
+    private JLabel correctScore, incorrectScore;
+    private int correctCount, incorrectCount;
 
     private void generateQuestion() {
         int min = 1;
@@ -119,7 +89,6 @@ public class ArithmeticGame extends JFrame {
     }
 
     public ArithmeticGame() {
-
         setTitle("Interactive Arithmetic Game");
         setSize(750, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -148,9 +117,6 @@ public class ArithmeticGame extends JFrame {
         secondNumberLabel = new JLabel("3", JLabel.CENTER);
         secondNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
         secondNumberLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
-        firstNumberLabel.setPreferredSize(new Dimension(80, 60));
-        secondNumberLabel.setPreferredSize(new Dimension(80, 60));
 
         JLabel equalLabel = new JLabel("=", JLabel.CENTER);
         equalLabel.setFont(new Font("Arial", Font.BOLD, 28));
@@ -277,7 +243,6 @@ public class ArithmeticGame extends JFrame {
 
         JPanel correctBox = new JPanel(new BorderLayout());
         correctBox.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        correctBox.setPreferredSize(new Dimension(80, 70));
         correctBox.setMinimumSize(new Dimension(80, 70));
         correctBox.setMaximumSize(new Dimension(80, 70));
 
@@ -295,7 +260,6 @@ public class ArithmeticGame extends JFrame {
 
         JPanel incorrectBox = new JPanel(new BorderLayout());
         incorrectBox.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        incorrectBox.setPreferredSize(new Dimension(80, 70));
         incorrectBox.setMinimumSize(new Dimension(80, 70));
         incorrectBox.setMaximumSize(new Dimension(80, 70));
 
@@ -341,7 +305,6 @@ public class ArithmeticGame extends JFrame {
 
         setVisible(true);
     }
-
     public static void main(String[] args) {
         new ArithmeticGame();
     }
