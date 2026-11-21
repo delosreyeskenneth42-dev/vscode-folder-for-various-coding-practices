@@ -1,46 +1,19 @@
 package Final_Arithmetic_Game_Output;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.event.ActionListener;
-
+import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 
 interface Scoreable {
-
     void addCorrectScore();
-
     void addIncorrectScore();
-
 }
-
 abstract class ArithmeticOperation {
-
     public abstract int calculate(int firstNumber, int secondNumber);
-
     public abstract String getSymbol();
-
 }
 
 class Addition extends ArithmeticOperation {
-
     @Override
     public int calculate(int firstNumber, int secondNumber) {
         return firstNumber + secondNumber;
@@ -50,11 +23,9 @@ class Addition extends ArithmeticOperation {
     public String getSymbol() {
         return "+";
     }
-
 }
 
 class Subtraction extends ArithmeticOperation {
-
     @Override
     public int calculate(int firstNumber, int secondNumber) {
         return firstNumber - secondNumber;
@@ -64,11 +35,9 @@ class Subtraction extends ArithmeticOperation {
     public String getSymbol() {
         return "-";
     }
-
 }
 
 class Multiplication extends ArithmeticOperation {
-
     @Override
     public int calculate(int firstNumber, int secondNumber) {
         return firstNumber * secondNumber;
@@ -78,11 +47,9 @@ class Multiplication extends ArithmeticOperation {
     public String getSymbol() {
         return "×";
     }
-
 }
 
 class Division extends ArithmeticOperation {
-
     @Override
     public int calculate(int firstNumber, int secondNumber) {
         return firstNumber / secondNumber;
@@ -92,11 +59,9 @@ class Division extends ArithmeticOperation {
     public String getSymbol() {
         return "÷";
     }
-
 }
 
 class Modulo extends ArithmeticOperation {
-
     @Override
     public int calculate(int firstNumber, int secondNumber) {
         return firstNumber % secondNumber;
@@ -106,46 +71,26 @@ class Modulo extends ArithmeticOperation {
     public String getSymbol() {
         return "%";
     }
-
 }
 
 public class ArithmeticGame extends JFrame implements Scoreable {
-
     private Random random = new Random();
+    private ArithmeticOperation currentOperation;
 
-    private JLabel firstNumberLabel;
-    private JLabel operatorLabel;
-    private JLabel secondNumberLabel;
-
-    private JRadioButton additionButton;
-    private JRadioButton subtractionButton;
-    private JRadioButton multiplicationButton;
-    private JRadioButton divisionButton;
-    private JRadioButton moduloButton;
-
-    private JRadioButton easyButton;
-    private JRadioButton mediumButton;
-    private JRadioButton hardButton;
+    private JLabel firstNumberLabel, operatorLabel, secondNumberLabel;
+    private JRadioButton additionButton, subtractionButton, multiplicationButton, divisionButton, moduloButton;
+    private JRadioButton easyButton, mediumButton, hardButton;
 
     private int correctAnswer;
     private JTextField answerField;
-    private JLabel correctScore;
-    private JLabel incorrectScore;
-
-    private int correctCount;
-    private int incorrectCount;
-
-    private ArithmeticOperation currentOperation;
+    private JLabel correctScore, incorrectScore;
+    private int correctCount, incorrectCount;
 
     private void generateQuestion() {
-
         int min = 1;
         int max = 50;
 
-        if (easyButton.isSelected()) {
-            min = 1;
-            max = 50;
-        } else if (mediumButton.isSelected()) {
+        if (mediumButton.isSelected()) {
             min = 51;
             max = 100;
         } else if (hardButton.isSelected()) {
@@ -155,20 +100,16 @@ public class ArithmeticGame extends JFrame implements Scoreable {
 
         int firstNumber;
         int secondNumber;
-
         if (divisionButton.isSelected()) {
-
             firstNumber = random.nextInt(max - min + 1) + min;
 
             do {
                 secondNumber = random.nextInt(firstNumber - min + 1) + min;
             } while (firstNumber % secondNumber != 0);
-
         } else {
 
             firstNumber = random.nextInt(max - min + 1) + min;
             secondNumber = random.nextInt(max - min + 1) + min;
-
         }
 
         if (additionButton.isSelected()) {
@@ -197,11 +138,9 @@ public class ArithmeticGame extends JFrame implements Scoreable {
     }
 
     private void checkAnswer() {
-
         String userInput = answerField.getText();
 
         try {
-
             int playerAnswer = Integer.parseInt(userInput);
 
             if (playerAnswer == correctAnswer) {
@@ -214,38 +153,30 @@ public class ArithmeticGame extends JFrame implements Scoreable {
             answerField.setText("");
 
         } catch (NumberFormatException e) {
-
             JOptionPane.showMessageDialog(this, "Please enter a valid number!");
-
         }
 
         generateQuestion();
-
     }
-
     @Override
     public void addCorrectScore() {
 
         correctCount++;
-
         correctScore.setText(String.valueOf(correctCount));
-
     }
 
     @Override
     public void addIncorrectScore() {
 
         incorrectCount++;
-
         incorrectScore.setText(String.valueOf(incorrectCount));
 
     }
 
     public ArithmeticGame() {
-
         setTitle("Interactive Arithmetic Game");
         setSize(750, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JLabel titleLabel = new JLabel("Interactive Arithmetic Game", JLabel.CENTER);
@@ -256,8 +187,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         headerPanel.setBackground(Color.LIGHT_GRAY);
         headerPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
         headerPanel.add(titleLabel);
-
-        JPanel questionPanel = new JPanel(new BorderLayout());
 
         JPanel equationPanel = new JPanel(new GridLayout(1, 5, 15, 0));
 
@@ -271,9 +200,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         secondNumberLabel = new JLabel("3", JLabel.CENTER);
         secondNumberLabel.setFont(new Font("Arial", Font.BOLD, 28));
         secondNumberLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
-        firstNumberLabel.setPreferredSize(new Dimension(80, 60));
-        secondNumberLabel.setPreferredSize(new Dimension(80, 60));
 
         JLabel equalLabel = new JLabel("=", JLabel.CENTER);
         equalLabel.setFont(new Font("Arial", Font.BOLD, 28));
@@ -303,8 +229,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
         answerPanel.add(submitButton);
 
         equationPanel.add(answerPanel);
-
-        questionPanel.add(equationPanel, BorderLayout.CENTER);
 
         JPanel optionsPanel = new JPanel(new GridLayout(1, 3, 15, 0));
 
@@ -400,7 +324,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
 
         JPanel correctBox = new JPanel(new BorderLayout());
         correctBox.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        correctBox.setPreferredSize(new Dimension(80, 70));
         correctBox.setMinimumSize(new Dimension(80, 70));
         correctBox.setMaximumSize(new Dimension(80, 70));
 
@@ -418,7 +341,6 @@ public class ArithmeticGame extends JFrame implements Scoreable {
 
         JPanel incorrectBox = new JPanel(new BorderLayout());
         incorrectBox.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        incorrectBox.setPreferredSize(new Dimension(80, 70));
         incorrectBox.setMinimumSize(new Dimension(80, 70));
         incorrectBox.setMaximumSize(new Dimension(80, 70));
 
@@ -456,7 +378,7 @@ public class ArithmeticGame extends JFrame implements Scoreable {
 
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        mainPanel.add(questionPanel, BorderLayout.NORTH);
+        mainPanel.add(equationPanel, BorderLayout.NORTH);
         mainPanel.add(optionsPanel, BorderLayout.CENTER);
 
         add(headerPanel, BorderLayout.NORTH);
